@@ -3,6 +3,8 @@ package com.example.service;
 import com.example.model.Client;
 import com.example.repository.ClientRepository;
 import lombok.NonNull;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> findAll() {
-        return clientRepository.findAll();
+        return (List<Client>) clientRepository.findAll();
     }
 
     @Override
@@ -49,7 +51,12 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Object findAll(Sort.Direction direction, String id) {
+    public Object findAllWithSorting(Sort.Direction direction, String id) {
         return clientRepository.findAll(Sort.by(direction, id));
+    }
+
+    @Override
+    public Page<Client> findPaginated(Pageable pageable) {
+        return clientRepository.findAll(pageable);
     }
 }

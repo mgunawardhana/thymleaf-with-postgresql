@@ -2,6 +2,8 @@ package com.example.service;
 
 
 import com.example.model.Client;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -19,5 +21,7 @@ public interface ClientService {
 
     Client findByEmail(String email);
 
-    Object findAll(Sort.Direction direction, String id);
+    Object findAllWithSorting(Sort.Direction direction, String id);
+
+    Page<Client> findPaginated(Pageable pageable);
 }
